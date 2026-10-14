@@ -1,5 +1,7 @@
-first_name = "Maria"
-last_name = "Santos"
+
+first_name = input("Enter first name: ")
+last_name = input("Enter last name: ")
+
 print(f"First name: {first_name}")
 print(f"Last name: {last_name}")
 
@@ -28,8 +30,8 @@ for char in full_name:
     print(char)
 
 
-sliced_first = full_name[0:5]
-sliced_last = full_name[6:]
+sliced_first = full_name[0:len(first_name)]
+sliced_last = full_name[len(first_name) + 1:]
 print(f"Sliced first name: {sliced_first}")
 print(f"Sliced last name: {sliced_last}")
 
@@ -46,4 +48,4 @@ if index != -1:
 else:
     print(f"Character '{search_char}' not found.")
 
-print('The blank line between a and S is the space in "Maria Santos".')
+print(f'The blank line printed above during the loop is the space in "{full_name}".')
