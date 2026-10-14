@@ -8,31 +8,34 @@ def main():
         total_pages = 0
         pages_read = 0
         
-        
-       
+        # Loop for Total Pages
         while True:
             total_str = input("How many pages does the book have?: ")
             try:
                 total_pages = int(total_str)
+                if total_pages <= 0:
+                    print("Invalid input. Total pages must be a positive number greater than 0.\n")
+                    continue  # Restarts this specific prompt loop
                 break
             except ValueError:
                 print("Invalid input. Please enter a valid number.\n")
                 
-        
+        # Loop for Pages Read
         while True:
             read_str = input("How many pages have you read?: ")
             try:
                 pages_read = int(read_str)
+                if pages_read < 0:
+                    print("Invalid input. Pages read cannot be a negative number.\n")
+                    continue  # Restarts this specific prompt loop
+                if pages_read > total_pages:
+                    print(f"Invalid input. You cannot read more than the total pages ({total_pages}).\n")
+                    continue
                 break
             except ValueError:
                 print("Invalid input. Please enter a valid number.\n")
                 
-        
-        if total_pages <= 0 or pages_read < 0 or pages_read > total_pages:
-            print("Invalid page input. Please try again.\n")
-            continue
-            
-        
+        # Date Input Loop
         issue_date = None
         due_date = None
         
@@ -52,21 +55,19 @@ def main():
             except ValueError:
                 print("Invalid date format. Please use YYYY-MM-DD.\n")
 
-  
+        # Calculations
         today = date.today()
         percentage = (pages_read / total_pages) * 100
         pages_left = total_pages - pages_read
         
-        
         remaining_days = (due_date - today).days
 
-        print(f"You have read {percentage:.0f}% of the book.")
+        print(f"\nYou have read {percentage:.0f}% of the book.")
         print(f"You have {pages_left} pages left to read.")
 
         if pages_left == 0:
             print("You have finished the book!")
         elif remaining_days > 0:
-         
             pages_per_day = math.ceil(pages_left / remaining_days)
             print(f"You should read {pages_per_day} pages per day.")
         else:
